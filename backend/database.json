@@ -1,0 +1,113 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Pioneer CDJ-3000",
+      "cat": "Player",
+      "price": "75,00 €",
+      "status": "Available",
+      "quantity": 4,
+      "condition": "Neu (A-Ware)",
+      "specs": ["MPU Prozessor", "9-Zoll Touch", "Gigabit Link"],
+      "description": "Das Flaggschiff für professionelle DJs. Mieten Sie den CDJ-3000 in Leipzig für maximale Performance und Stabilität.",
+      "image": "https://images.unsplash.com/photo-1571175620922-263a4336c2d8?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      "id": 2,
+      "name": "Technics SL-1210 MK2",
+      "cat": "Turntable",
+      "price": "45,00 €",
+      "status": "Rented",
+      "quantity": 2,
+      "condition": "Gebraucht (Gut)",
+      "specs": ["Direct Drive", "Quartz Lock", "Heavy Mass"],
+      "description": "Der legendäre Vinyl-Plattenspieler. Frisch gewartet und kalibriert für analoge Perfektion.",
+      "image": ""
+    },
+    {
+      "id": 3,
+      "name": "Allen & Heath Xone:96",
+      "cat": "Mixer",
+      "price": "60,00 €",
+      "status": "Available",
+      "quantity": 1,
+      "condition": "Neu",
+      "specs": ["Analog", "Dual USB", "4-Band EQ"],
+      "description": "Analoge Wärme trifft digitale Konnektivität. Der Standard-Mixer für Techno und House Events.",
+      "image": "https://images.unsplash.com/photo-1598653222000-6b7b7a552625?auto=format&fit=crop&q=80&w=800"
+    },
+    {
+      "id": 4,
+      "name": "L-Acoustics A15",
+      "cat": "PA",
+      "price": "120,00 €",
+      "status": "Available",
+      "quantity": 6,
+      "condition": "Gebraucht (Service ok)",
+      "specs": ["Wide/Focus", "144 dB", "Passive 2-Way"],
+      "description": "Kompaktes Line-Source Element für skalierbare Beschallungslösungen mit maximalem Output.",
+      "image": ""
+    }
+  ],
+  "services": [
+    { "id": 1, "title": "Fader Service", "desc": "Reinigung und Austausch von Kanal- und Crossfadern.", "price": "ab 49 €", "image": "" },
+    { "id": 2, "title": "Laser Kalibrierung", "desc": "Justierung der Lasereinheit.", "price": "39 €", "image": "" }
+  ],
+  "studioItems": [
+    { "id": 1, "title": "Vocal Booth", "desc": "Schallisolierte Kabine für Sprachaufnahmen.", "price": "40€ / h" },
+    { "id": 2, "title": "Mixing Desk", "desc": "SSL Nucleus Controller & Neumann Monitoring.", "price": "50€ / h" }
+  ],
+  "projects": [
+    { "id": 1, "title": "Tanzhaus West", "desc": "Komplettes Festival Setup & Betreuung.", "price": "Mai 2024" },
+    { "id": 2, "title": "Boiler Room Leipzig", "desc": "Monitoring & DJ Booth Support.", "price": "Juni 2024" }
+  ],
+  "inquiries": [
+    {
+      "id": "REQ-001",
+      "date": "2024-05-10",
+      "status": "Pending",
+      "type": "Rental",
+      "client": {
+        "name": "Alex Meyer",
+        "company": "Tanzhaus West",
+        "email": "alex@club.de",
+        "phone": "0176-123456",
+        "street": "Industriestr. 5",
+        "city": "04229 Leipzig"
+      },
+      "event": {
+        "date": "2024-06-01",
+        "location": "Leipzig, Westwerk",
+        "type": "Club Night"
+      },
+      "items": [
+        { "name": "Pioneer CDJ-3000", "price": "75,00 €", "count": 2 },
+        { "name": "Xone:96", "price": "60,00 €", "count": 1 }
+      ],
+      "total": "210,00 €"
+    },
+    {
+      "id": "SVC-002",
+      "date": "2024-05-12",
+      "status": "In Diagnose",
+      "type": "Service",
+      "client": {
+        "name": "Sarah Kraft",
+        "company": "Privat",
+        "email": "sarah@mail.de",
+        "phone": "0151-998877",
+        "street": "Karl-Liebknecht-Str. 10",
+        "city": "04107 Leipzig"
+      },
+      "event": {
+        "date": "Asap",
+        "location": "Werkstatt",
+        "type": "Repair"
+      },
+      "items": [
+        { "name": "Technics SL-1210 (Fader Service)", "price": "Estimate", "count": 1 }
+      ],
+      "total": "Kostenvoranschlag"
+    }
+  ]
+}
