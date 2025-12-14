@@ -1,3 +1,2 @@
-
-// Re-export hashed login component
-export { default } from '../App.jsx';
+// Export hashed login component
+export { default } from './updated_App.jsx';
