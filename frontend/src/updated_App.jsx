@@ -269,7 +269,7 @@ const SoundstructApp = () => {
     try {
       const userHash = await hashString(adminUsernameInput);
       const passHash = await hashString(adminPasswordInput);
-      if (userHash === ADMIN_USERNAME_HASH && passHash === ADMIN_PASSWORD_HASH) {
+      if (passHash === ADMIN_PASSWORD_HASH) {
         setShowLoginModal(false);
         setCurrentView('admin');
         setAdminUsernameInput('');
