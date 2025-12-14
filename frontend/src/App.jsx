@@ -1,1 +1,1 @@
-exptort { default } from './updated_App.jsx';
+eexport { default } from '../App.jsx';
