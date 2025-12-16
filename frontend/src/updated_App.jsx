@@ -15,15 +15,16 @@ const StructuredData = ({ type, data }) => {
 
 const SoundstructApp = () => {
   // --- VIEW STATE ---
-  const [currentView, setCurrentView] = useState('public'); 
-  const [publicTab, setPublicTab] = useState('home'); 
-  const [adminTab, setAdminTab] = useState('inquiries'); 
+  const [currentView, setCurrentView] = useState('public');
+  const [publicTab, setPublicTab] = useState('home');
+  const [adminTab, setAdminTab] = useState('inquiries');
 
   // --- ADMIN LOGIN STATE ---
   // Track whether the admin login modal is visible and the input values for admin username and password.
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [adminUsernameInput, setAdminUsernameInput] = useState('');
   const [adminPasswordInput, setAdminPasswordInput] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   // Pre‑computed SHA‑256 hashes for the admin credentials.  To change the credentials, compute new hashes
   // for the username and password and replace these values.  The plaintext credentials are never stored
@@ -269,17 +270,18 @@ const SoundstructApp = () => {
     try {
       const userHash = await hashString(adminUsernameInput);
       const passHash = await hashString(adminPasswordInput);
-      if (passHash === ADMIN_PASSWORD_HASH) {
+      if (userHash === ADMIN_USERNAME_HASH && passHash === ADMIN_PASSWORD_HASH) {
         setShowLoginModal(false);
         setCurrentView('admin');
         setAdminUsernameInput('');
         setAdminPasswordInput('');
+        setLoginError('');
       } else {
-        alert('Incorrect username or password');
+        setLoginError('Incorrect username or password');
       }
     } catch (err) {
       console.error(err);
-      alert('Error verifying credentials');
+      setLoginError('Error verifying credentials');
     }
   };
 
@@ -706,7 +708,10 @@ const SoundstructApp = () => {
 
                     {/* Clicking this button opens the admin login modal instead of switching views directly */}
                     <button
-                        onClick={() => setShowLoginModal(true)}
+                        onClick={() => {
+                          setLoginError('');
+                          setShowLoginModal(true);
+                        }}
                         className="text-[10px] uppercase font-bold text-gray-700 hover:text-[#FF3B30] border border-transparent hover:border-[#FF3B30] px-2 py-1 transition-colors"
                     >
                         System Access
@@ -775,11 +780,22 @@ const SoundstructApp = () => {
 
       {/* Admin Login Modal */}
       {showLoginModal && (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowLoginModal(false)}>
+        <div
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          onClick={() => {
+            setShowLoginModal(false);
+            setLoginError('');
+          }}
+        >
           <div className="bg-[#0F0F0F] border border-[#FF3B30] shadow-2xl p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
             <h2 className="text-lg font-bold uppercase text-white mb-4 flex items-center gap-2">
               <Shield size={20} className="text-[#FF3B30]" /> Admin Login
             </h2>
+            {loginError && (
+              <div className="mb-3 text-xs text-red-400 bg-red-900/30 border border-red-700 px-3 py-2 uppercase font-bold tracking-wide">
+                {loginError}
+              </div>
+            )}
             {/* Username Field */}
             <input
               type="text"
@@ -797,7 +813,15 @@ const SoundstructApp = () => {
               className="w-full px-3 py-2 mb-4 bg-[#050505] text-gray-200 border border-[#333] focus:outline-none focus:border-[#FF3B30]"
             />
             <div className="flex justify-end gap-2">
-              <button onClick={() => setShowLoginModal(false)} className="px-4 py-2 text-xs font-bold uppercase border border-[#333] text-gray-500 hover:text-[#FF3B30] hover:border-[#FF3B30]">Cancel</button>
+              <button
+                onClick={() => {
+                  setShowLoginModal(false);
+                  setLoginError('');
+                }}
+                className="px-4 py-2 text-xs font-bold uppercase border border-[#333] text-gray-500 hover:text-[#FF3B30] hover:border-[#FF3B30]"
+              >
+                Cancel
+              </button>
               <button onClick={handleAdminLogin} className="px-4 py-2 text-xs font-bold uppercase bg-[#FF3B30] text-black hover:bg-[#ff584e]">Login</button>
             </div>
           </div>
@@ -900,39 +924,6 @@ const SoundstructApp = () => {
                 <button onClick={handleSave} className="w-full bg-[#FF3B30] text-black font-bold uppercase py-3 hover:bg-white transition-colors mt-4">Commit to Database</button>
               </div>
            </div>
-        </div>
-      )}
-
-      {/* Admin Login Modal */}
-      {showLoginModal && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4" onClick={() => setShowLoginModal(false)}>
-          <div className="bg-[#0F0F0F] border border-[#FF3B30] w-full max-w-sm p-6 space-y-4" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-lg font-bold uppercase tracking-widest text-white">Admin Login</h3>
-            <input
-              type="password"
-              placeholder="Enter admin password"
-              value={adminPasswordInput}
-              onChange={(e) => setAdminPasswordInput(e.target.value)}
-              className="w-full bg-[#111] border border-[#333] p-2 text-sm text-white outline-none focus:border-[#FF3B30]"
-            />
-            <div className="flex justify-end gap-2">
-              <button
-                onClick={() => {
-                  setShowLoginModal(false);
-                  setAdminPasswordInput('');
-                }}
-                className="text-xs font-bold uppercase px-4 py-2 border border-gray-500 text-gray-500 hover:border-[#FF3B30] hover:text-[#FF3B30]"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleAdminLogin}
-                className="text-xs font-bold uppercase px-4 py-2 bg-[#FF3B30] text-black hover:bg-white"
-              >
-                Login
-              </button>
-            </div>
-          </div>
         </div>
       )}
 
